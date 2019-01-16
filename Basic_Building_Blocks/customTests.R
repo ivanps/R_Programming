@@ -5,40 +5,20 @@ getState <- function(){
   environment(sys.function(1))$e
 }
 
-# Retrieve the log from swirl's state
-getLog <- function(){
-  getState()$log
-}
-
 submit_log <- function(){
   
   # Please edit the link below
   pre_fill_link <- 
  "https://docs.google.com/forms/d/e/1FAIpQLSfh9NgcrQPHAJoNNGqpneUy8IaVECBEs1bXeONI0ObhhyeXfQ/viewform?usp=pp_url&entry.92129845="
-  # Do not edit the code below
-  if(!grepl("=$", pre_fill_link)){
-    pre_fill_link <- paste0(pre_fill_link, "=")
-  }
-  
-  p <- function(x, p, f, l = length(x)){if(l < p){x <- c(x, rep(f, p - l))};x}
   
   temp <- tempfile()
-  log_ <- getLog()
-  print(log_)
-  nrow_ <- max(unlist(lapply(log_, length)))
-  log_tbl <- data.frame(user = rep(log_$user, nrow_),
-                        course_name = rep(log_$course_name, nrow_),
-                        lesson_name = rep(log_$lesson_name, nrow_),
-                        question_number = p(log_$question_number, nrow_, NA),
-                        correct = p(log_$correct, nrow_, NA),
-                        attempt = p(log_$attempt, nrow_, NA),
-                        skipped = p(log_$skipped, nrow_, NA),
-                        datetime = p(log_$datetime, nrow_, NA),
-                        stringsAsFactors = FALSE)
-  print(log_tbl)
-  write.csv(log_tbl, file = temp, row.names = FALSE)
-  write.csv(log_tbl, file = "Quiz Output.csv", row.names = FALSE)
-  encoded_log <- base64(temp)
-  print(encoded_log)
+  user <- if(is.null(getState()$user)) "No name" else getState()$user
+  course <- getState()$test_course
+  lesson <- getState()$test_lesson
+  nrow <- getState()$row
+  iptr <- getState()$iptr
+  skips <- if(is.null(getState()$skips)) 0 else getState()$skips
+  uresults <- paste(user, course, lesson, nrow, iptr, skips, sep=",")
+  encoded_log <- base64(uresults)[[1]]
   browseURL(paste0(pre_fill_link, encoded_log))
 }
