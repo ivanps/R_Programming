@@ -34,7 +34,10 @@ submit_log <- function(){
                         skipped = p(log_$skipped, nrow_, NA),
                         datetime = p(log_$datetime, nrow_, NA),
                         stringsAsFactors = FALSE)
+  print(log_tbl)
   write.csv(log_tbl, file = temp, row.names = FALSE)
+  write.csv(log_tbl, file = "Quiz Output.csv", row.names = FALSE)
   encoded_log <- base64(temp)
+  print(encoded_log)
   browseURL(paste0(pre_fill_link, encoded_log))
 }
