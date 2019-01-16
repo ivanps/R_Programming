@@ -12,9 +12,10 @@ submit_log <- function(){
  "https://docs.google.com/forms/d/e/1FAIpQLSfh9NgcrQPHAJoNNGqpneUy8IaVECBEs1bXeONI0ObhhyeXfQ/viewform?usp=pp_url&entry.92129845="
   
   sid <- readline("What is your student ID (matricula)?")
-  lesson <- getState()$test_lesson
+  course <- attr(getState()$les, "course_name")
+  lesson <- attr(getState()$les, "lesson_name")
   skips <- if(is.null(getState()$skips)) 0 else getState()$skips
-  uresults <- paste(sid, lesson, skips, sep=",")
+  uresults <- paste(sid, course, lesson, skips, sep=",")
   print(uresults)
   encoded_log <- base64(uresults)[[1]]
   browseURL(paste0(pre_fill_link, encoded_log))
