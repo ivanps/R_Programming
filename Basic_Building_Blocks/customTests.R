@@ -5,15 +5,9 @@ getState <- function(){
   environment(sys.function(1))$e
 }
 
-# Get the value which a user either entered directly or was computed
-# by the command he or she entered.
-getVal <- function(){
-  getState()$val
-}
-
-# Get the last expression which the user entered at the R console.
-getExpr <- function(){
-  getState()$expr
+# Retrieve the log from swirl's state
+getLog <- function(){
+  getState()$log
 }
 
 submit_log <- function(){
