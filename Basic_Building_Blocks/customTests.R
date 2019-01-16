@@ -11,14 +11,13 @@ submit_log <- function(){
   pre_fill_link <- 
  "https://docs.google.com/forms/d/e/1FAIpQLSfh9NgcrQPHAJoNNGqpneUy8IaVECBEs1bXeONI0ObhhyeXfQ/viewform?usp=pp_url&entry.92129845="
   
-  temp <- tempfile()
-  user <- if(is.null(getState()$user)) "No name" else getState()$user
-  course <- getState()$test_course
-  lesson <- getState()$test_lesson
+  sid <- readline("What is your student ID (matricula)?")
+  course <- getState()$course_name
+  lesson <- getState()$lesson_name
   nrow <- getState()$row
   iptr <- getState()$iptr
   skips <- if(is.null(getState()$skips)) 0 else getState()$skips
-  uresults <- paste(user, course, lesson, nrow, iptr, skips, sep=",")
+  uresults <- paste(sid, course, lesson, nrow, iptr, skips, sep=",")
   encoded_log <- base64(uresults)[[1]]
   browseURL(paste0(pre_fill_link, encoded_log))
 }
