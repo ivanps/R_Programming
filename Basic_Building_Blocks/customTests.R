@@ -22,7 +22,7 @@ submit_log <- function(){
   
   p <- function(x, p, f, l = length(x)){if(l < p){x <- c(x, rep(f, p - l))};x}
   
-  ptemp <- tempfile()
+  temp <- tempfile()
   log_ <- getLog()
   nrow_ <- max(unlist(lapply(log_, length)))
   log_tbl <- data.frame(user = rep(log_$user, nrow_),
