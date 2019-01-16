@@ -38,34 +38,3 @@ submit_log <- function(){
   encoded_log <- base64encode(temp)
   browseURL(paste0(pre_fill_link, encoded_log))
 }
-
-coursera_on_demand <- function(){
-  selection <- getState()$val
-  if(selection == "Yes"){
-    email <- readline("What is your email address? ")
-    token <- readline("What is your assignment token? ")
-    
-    payload <- sprintf('{  
-      "assignmentKey": "ZRVmbK5hEeW24RJH5gkutw",
-      "submitterEmail": "%s",  
-      "secret": "%s",  
-      "parts": {  
-        "fyjXt": {  
-          "output": "correct"  
-        }  
-      }  
-    }', email, token)
-    url <- 'https://www.coursera.org/api/onDemandProgrammingScriptSubmissions.v1'
-  
-    respone <- httr::POST(url, body = payload)
-    if(respone$status_code >= 200 && respone$status_code < 300){
-      message("Grade submission succeeded!")
-    } else {
-      message("Grade submission failed.")
-      message("Press ESC if you want to exit this lesson and you")
-      message("want to try to submit your grade at a later time.")
-      return(FALSE)
-    }
-  }
-  TRUE
-}
