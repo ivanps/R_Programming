@@ -13,8 +13,8 @@ getLog <- function(){
 submit_log <- function(){
   
   # Please edit the link below
-  pre_fill_link <- "https://docs.google.com/forms/d/e/1FAIpQLSfaXU8_jPwWcxfK43yfUdKgAy2cCz9Zzp03-lhJhIWpp5j3vg/viewform?usp=pp_url"
-  
+  pre_fill_link <- 
+ "https://docs.google.com/forms/d/e/1FAIpQLSfh9NgcrQPHAJoNNGqpneUy8IaVECBEs1bXeONI0ObhhyeXfQ/viewform?usp=pp_url&entry.92129845="
   # Do not edit the code below
   if(!grepl("=$", pre_fill_link)){
     pre_fill_link <- paste0(pre_fill_link, "=")
@@ -24,6 +24,7 @@ submit_log <- function(){
   
   temp <- tempfile()
   log_ <- getLog()
+  print(log_)
   nrow_ <- max(unlist(lapply(log_, length)))
   log_tbl <- data.frame(user = rep(log_$user, nrow_),
                         course_name = rep(log_$course_name, nrow_),
