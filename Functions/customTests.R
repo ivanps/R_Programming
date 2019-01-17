@@ -129,33 +129,17 @@ getExpr <- function(){
   getState()$expr
 }
 
-coursera_on_demand <- function(){
-  selection <- getState()$val
-  if(selection == "Yes"){
-    email <- readline("What is your email address? ")
-    token <- readline("What is your assignment token? ")
-    
-    payload <- sprintf('{  
-      "assignmentKey": "Q4-fkq8YEeW1-RKql4-XpQ",
-      "submitterEmail": "%s",  
-      "secret": "%s",  
-      "parts": {  
-        "3MwYt": {  
-          "output": "correct"  
-        }  
-      }  
-    }', email, token)
-    url <- 'https://www.coursera.org/api/onDemandProgrammingScriptSubmissions.v1'
+submit_log <- function(){
   
-    respone <- httr::POST(url, body = payload)
-    if(respone$status_code >= 200 && respone$status_code < 300){
-      message("Grade submission succeeded!")
-    } else {
-      message("Grade submission failed.")
-      message("Press ESC if you want to exit this lesson and you")
-      message("want to try to submit your grade at a later time.")
-      return(FALSE)
-    }
-  }
-  TRUE
+  # Please edit the link below
+  pre_fill_link <- 
+    "https://docs.google.com/forms/d/e/1FAIpQLSfh9NgcrQPHAJoNNGqpneUy8IaVECBEs1bXeONI0ObhhyeXfQ/viewform?usp=pp_url&entry.92129845="
+  
+  sid <- readline("What is your student ID (matricula)?")
+  course <- attr(getState()$les, "course_name")
+  lesson <- attr(getState()$les, "lesson_name")
+  skips <- if(is.null(getState()$skips)) 0 else getState()$skips
+  uresults <- paste(sid, course, lesson, skips, sep=",")
+  encoded_log <- base64(uresults)[[1]]
+  browseURL(paste0(pre_fill_link, encoded_log))
 }

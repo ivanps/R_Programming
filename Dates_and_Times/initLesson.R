@@ -1,3 +1,11 @@
+rm(list=ls())
+suppressMessages(library(RCurl))
+
+# Path to installed lesson
+.lessonpath <- file.path(path.package("swirl"), "Courses", "R_Programming",
+                         "Dates_and_Times")
+
+
 ### MAY END UP USING THIS AT SOME POINT... ###
 
 # Code used to create dataset

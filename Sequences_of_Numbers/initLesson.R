@@ -8,4 +8,4 @@ suppressMessages(library(RCurl))
 
 # Path to installed lesson
 .lessonpath <- file.path(path.package("swirl"), "Courses", "R_Programming",
-                         "Missing_Values")
+                         "Sequences_of_Numbers")

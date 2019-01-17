@@ -1,3 +1,11 @@
+rm(list=ls())
+suppressMessages(library(RCurl))
+
+# Path to installed lesson
+.lessonpath <- file.path(path.package("swirl"), "Courses", "R_Programming",
+                         "lapply_and_sapply")
+
+
 # For compatibility with 2.2.21
 .get_course_path <- function(){
   tryCatch(swirl:::swirl_courses_dir(),

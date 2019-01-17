@@ -16,7 +16,6 @@ submit_log <- function(){
   lesson <- attr(getState()$les, "lesson_name")
   skips <- if(is.null(getState()$skips)) 0 else getState()$skips
   uresults <- paste(sid, course, lesson, skips, sep=",")
-  print(uresults)
   encoded_log <- base64(uresults)[[1]]
   browseURL(paste0(pre_fill_link, encoded_log))
 }

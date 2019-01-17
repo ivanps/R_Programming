@@ -3,3 +3,10 @@
 # the lesson.
 
 x <- sample(c(rnorm(20), rep(NA, 20)))
+
+rm(list=ls())
+suppressMessages(library(RCurl))
+
+# Path to installed lesson
+.lessonpath <- file.path(path.package("swirl"), "Courses", "R_Programming",
+                         "Subsetting_Vectors")

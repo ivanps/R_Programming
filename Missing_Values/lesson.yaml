@@ -103,10 +103,11 @@
   Hint: Type Inf - Inf. Can you guess the result?
 
 - Class: mult_question
-  Output: "Would you like to receive credit for completing this course on
-    Coursera.org?"
+  Output: "If you answer all the question, you can report your progress to 
+  your instructor. Would you like to do that?"
   CorrectAnswer: NULL
   AnswerChoices: Yes;No
-  AnswerTests: coursera_on_demand()
+  AnswerTests: submit_log()
   Hint: ""
+
 
